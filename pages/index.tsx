@@ -5,6 +5,8 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { Header } from '../components/Header'
+import { Post } from '../components/Post'
+import { SideBarMenu } from '../components/SidebarMenu'
 
 const Home: NextPage = () => {
   return (
@@ -22,18 +24,15 @@ const Home: NextPage = () => {
       </Head>
       <Header />
       <div>
-        <div className="leftSide"></div>
+        <div className="leftSide">
+          <SideBarMenu />
+        </div>
         <div className="content">
-          <Paper elevation={0} className="p-20">
-            <Typography variant="h5">19 August, Thursday</Typography>
-            <Typography className="mt-15 mb-15">Some text here</Typography>
-            <Image
-              width={640}
-              height={427}
-              src="https://nypost.com/wp-content/uploads/sites/2/2022/03/Space-sex-feature.jpg?quality=75&strip=all"
-              alt=""
-            />
-          </Paper>
+          <Post />
+          <Post />
+          <Post />
+          <Post />
+          <Post />
         </div>
         <div className="rightSide"></div>
       </div>

@@ -1,0 +1,29 @@
+import React from 'react'
+
+import { Paper, Typography } from '@material-ui/core'
+import Image from 'next/image'
+import styles from './Post.module.scss'
+
+export const Post: React.FC = () => {
+  return (
+    <Paper elevation={0} className="p-20" classes={{ root: styles.paper }}>
+      <Typography variant="h5" className={styles.title}>
+        White House releases in-space servicing strategy
+      </Typography>
+      <Typography className="mt-15 mb-15">
+        COLORADO SPRINGS — A new federal strategy seeks to coordinate activities among agencies and interaction with the private sector to
+        advance work making and repairing spacecraft in space. The White House’s Office of Science and Technology Policy (OSTP) released a
+        national strategy for what it calls in-space servicing, assembly and manufacturing (ISAM) April 4. The document, released with
+        little fanfare by the administration, establishes a set of goals for supporting the development of technologies and services ranging
+        from refueling and repairing satellites to building new spacecraft in orbit. “We see this inflection point where, at least for us,
+        sustaining U.S.”
+      </Typography>
+      <Image
+        width={640}
+        height={427}
+        src="https://nypost.com/wp-content/uploads/sites/2/2022/03/Space-sex-feature.jpg?quality=75&strip=all"
+        alt=""
+      />
+    </Paper>
+  )
+}
