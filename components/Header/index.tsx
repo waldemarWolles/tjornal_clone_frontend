@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 
 import { Paper, Button, IconButton, styled } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
@@ -17,7 +18,12 @@ export const Header: React.FC = () => {
         <IconButton>
           <MenuIcon />
         </IconButton>
-        <LogoSvg className={styles.logo} width={40} height={40} />
+        <Link href="/">
+          <a className="ml-15 d-flex align-center">
+            <LogoSvg className={styles.logo} width={40} height={40} />
+          </a>
+        </Link>
+
         <div className={styles.searchBlock}>
           <SearchIcon />
           <input type="text" placeholder="Search" />
@@ -33,9 +39,11 @@ export const Header: React.FC = () => {
         <IconButton>
           <MessageIcon />
         </IconButton>
-        <IconButton className="ml-15">
-          <AvatarIcon />
-        </IconButton>
+        <Link href="/profile/1">
+          <a className="ml-15 d-flex align-center">
+            <AvatarIcon />
+          </a>
+        </Link>
       </div>
     </Paper>
   )

@@ -1,12 +1,15 @@
 import React from 'react'
 
-import { Paper, Typography } from '@material-ui/core'
+import { IconButton, Paper, Typography } from '@material-ui/core'
 import Image from 'next/image'
 import styles from './Post.module.scss'
+import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'
+import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined'
+import ShareIcon from '@material-ui/icons/Share'
 
 export const Post: React.FC = () => {
   return (
-    <Paper elevation={0} className="p-20" classes={{ root: styles.paper }}>
+    <Paper elevation={0} className="p-20 mb-30" classes={{ root: styles.paper }}>
       <Typography variant="h5" className={styles.title}>
         White House releases in-space servicing strategy
       </Typography>
@@ -24,6 +27,23 @@ export const Post: React.FC = () => {
         src="https://nypost.com/wp-content/uploads/sites/2/2022/03/Space-sex-feature.jpg?quality=75&strip=all"
         alt=""
       />
+      <ul className={styles.actions}>
+        <li>
+          <IconButton>
+            <ModeCommentOutlinedIcon />
+          </IconButton>
+        </li>
+        <li>
+          <IconButton>
+            <BookmarkBorderOutlinedIcon />
+          </IconButton>
+        </li>
+        <li>
+          <IconButton>
+            <ShareIcon />
+          </IconButton>
+        </li>
+      </ul>
     </Paper>
   )
 }
