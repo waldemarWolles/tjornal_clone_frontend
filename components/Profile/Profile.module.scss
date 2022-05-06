@@ -1,0 +1,54 @@
+.content {
+  width: 900px !important;
+}
+
+.profileContent {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.title {
+  font-size: 32px;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.countContainer {
+  margin-bottom: 20px;
+}
+
+.plusCount {
+  font-weight: 800;
+  color: #429b0f;
+  margin-right: 7px;
+}
+
+.avatar {
+  border-radius: 8px !important;
+}
+
+.settingsButton {
+  min-width: 44px !important;
+  margin-right: 7px !important;
+  padding: 8px !important;
+  background: #fff !important;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  border-radius: 8px !important;
+}
+
+.writeButton {
+  background: #2891fa !important;
+  padding: 8px 16px !important;
+  color: #fff !important;
+  box-shadow: 0px 3px 1px -2px rgb(0 0 0 / 20%), 0px 2px 2px 0px rgb(0 0 0 / 14%), 0px 1px 5px 0px rgb(0 0 0 / 12%);
+  border-radius: 8px !important;
+
+  svg {
+    margin-right: 8px;
+  }
+}
+
+.tabs {
+  display: flex;
+}

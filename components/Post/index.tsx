@@ -6,10 +6,11 @@ import styles from './Post.module.scss'
 import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import ShareIcon from '@material-ui/icons/Share'
+import clsx from 'clsx'
 
 export const Post: React.FC = () => {
   return (
-    <Paper elevation={0} className="p-20 mb-30" classes={{ root: styles.paper }}>
+    <Paper elevation={0} className={clsx('p-20 mb-30', styles.content)} classes={{ root: styles.paper }}>
       <Typography variant="h5" className={styles.title}>
         White House releases in-space servicing strategy
       </Typography>
