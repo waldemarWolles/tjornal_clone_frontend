@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/link-passhref */
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from 'react'
 
@@ -7,8 +8,9 @@ import { Button, Paper, Tab, Tabs, Typography } from '@material-ui/core'
 
 import SettingsIcon from '@material-ui/icons/Settings'
 import ChatIcon from '@material-ui/icons/Chat'
+import Link from 'next/link'
 
-type TabsTypes = 'articles' | 'comments' | 'bookmarks'
+export type TabsTypes = 'articles' | 'comments' | 'bookmarks'
 
 export const Profile: React.FC = () => {
   const [tabValue, setTabValue] = useState<TabsTypes>('articles')
@@ -32,9 +34,11 @@ export const Profile: React.FC = () => {
             <div>On the project since 05.04.2011</div>
           </div>
           <div>
-            <Button className={styles.settingsButton}>
-              <SettingsIcon />
-            </Button>
+            <Link href="/settings/1">
+              <Button className={styles.settingsButton}>
+                <SettingsIcon />
+              </Button>
+            </Link>
             <Button className={styles.writeButton}>
               <ChatIcon /> Write To
             </Button>

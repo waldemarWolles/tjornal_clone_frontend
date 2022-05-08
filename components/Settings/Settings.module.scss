@@ -1,0 +1,17 @@
+.content {
+  max-width: 640px;
+}
+
+.title {
+  font-weight: 500 !important;
+}
+
+.actions {
+  position: relative;
+  top: 5px;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}

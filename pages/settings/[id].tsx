@@ -1,12 +1,12 @@
 import { NextPage } from 'next'
 import React from 'react'
-import { Profile } from '../../components/Profile'
+import { Settings } from '../../components/Settings'
 import MainLayout from '../../layouts/MainLayout'
 
 const ProfilePage: NextPage = () => {
   return (
     <MainLayout fullWidth={true}>
-      <Profile />
+      <Settings />
     </MainLayout>
   )
 }

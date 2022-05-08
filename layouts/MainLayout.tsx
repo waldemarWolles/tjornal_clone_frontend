@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-page-custom-font */
 /* eslint-disable react/jsx-no-comment-textnodes */
+import clsx from 'clsx'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import { Header } from '../components/Header'
 import { SideBarMenu } from '../components/SidebarMenu'
 
-const MainLayout: NextPage = ({ children }) => {
+type Props = {
+  fullWidth?: boolean
+}
+
+const MainLayout: NextPage<Props> = ({ children, fullWidth }) => {
   return (
     <div>
       <Head>
@@ -24,7 +29,7 @@ const MainLayout: NextPage = ({ children }) => {
         <div className="leftSide">
           <SideBarMenu />
         </div>
-        <div className="content">{children}</div>
+        <div className={clsx('content', `${fullWidth && 'full-width'}`)}>{children}</div>
         <div className="rightSide"></div>
       </div>
     </div>
