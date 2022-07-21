@@ -7,12 +7,15 @@ import ModeCommentOutlinedIcon from '@material-ui/icons/ModeCommentOutlined'
 import BookmarkBorderOutlinedIcon from '@material-ui/icons/BookmarkBorderOutlined'
 import ShareIcon from '@material-ui/icons/Share'
 import clsx from 'clsx'
+import Link from 'next/link'
 
 export const Post: React.FC = () => {
   return (
     <Paper elevation={0} className={clsx('p-20 mb-30', styles.content)} classes={{ root: styles.paper }}>
       <Typography variant="h5" className={styles.title}>
-        White House releases in-space servicing strategy
+        <Link href="/news/test-123">
+          <a>White House releases in-space servicing strategy</a>
+        </Link>
       </Typography>
       <Typography className="mt-15 mb-15">
         COLORADO SPRINGS — A new federal strategy seeks to coordinate activities among agencies and interaction with the private sector to
