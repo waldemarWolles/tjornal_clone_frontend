@@ -12,7 +12,7 @@ export const FullPost: React.FC = () => {
         </Typography>
         <div>
           <Typography>
-            COLORADO SPRINGS — aaaaA new federal strategy seeks to coordinate activities among agencies and interaction with the private
+            COLORADO SPRINGSss — A new federal strategy seeks to coordinate activities among agencies and interaction with the private
             sector to advance work making and repairing spacecraft in space. The White House’s Office of Science and Technology Policy
             (OSTP) released a national strategy for what it calls in-space servicing, assembly and manufacturing (ISAM) April 4.
           </Typography>
