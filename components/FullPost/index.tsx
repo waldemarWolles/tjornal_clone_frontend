@@ -12,9 +12,9 @@ export const FullPost: React.FC = () => {
         </Typography>
         <div>
           <Typography>
-            COLORADO SPRINGSsss — A new federal strategy seeks to coordinate activities among agencies and interaction with the private
-            sector to advance work making and repairing spacecraft in space. The White House’s Office of Science and Technology Policy
-            (OSTP) released a national strategy for what it calls in-space servicing, assembly and manufacturing (ISAM) April 4.
+            COLORADO SPRINGS — A new federal strategy seeks to coordinate activities among agencies and interaction with the private sector
+            to advance work making and repairing spacecraft in space. The White House’s Office of Science and Technology Policy (OSTP)
+            released a national strategy for what it calls in-space servicing, assembly and manufacturing (ISAM) April 4.
           </Typography>
           <Typography>
             The document, released with little fanfare by the administration, establishes a set of goals for supporting the development of
