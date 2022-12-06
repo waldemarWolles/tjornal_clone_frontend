@@ -10,7 +10,7 @@ import MessageIcon from '@material-ui/icons/Message'
 import Link from 'next/link'
 
 const menu = [
-  { text: 'Line', icon: <LocalFireDepartmentIcon />, path: '/' },
+  { text: 'Line ', icon: <LocalFireDepartmentIcon />, path: '/' },
   { text: 'Messages', icon: <MessageIcon />, path: '/messages' },
   { text: 'Rating TJ', icon: <TrendingUpIcon />, path: '/ratings' },
   { text: 'Subscriptions', icon: <FormatListBulletedIcon />, path: '/subscriptions' },
