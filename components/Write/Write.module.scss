@@ -1,0 +1,14 @@
+.titleInput input {
+ font-size: 26px;
+}
+
+.titleInput > div {
+  &::after, &::before {
+    display: none;
+  }
+}
+
+.editor {
+  font-size: 18px;
+}
+

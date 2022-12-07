@@ -8,9 +8,11 @@ import { SideBarMenu } from '../components/SidebarMenu'
 
 type Props = {
   fullWidth?: boolean
+  hideMenu?: boolean
+  className?: string
 }
 
-const MainLayout: NextPage<Props> = ({ children, fullWidth }) => {
+const MainLayout: NextPage<Props> = ({ children, fullWidth, hideMenu, className }) => {
   return (
     <div>
       <Head>
@@ -25,10 +27,12 @@ const MainLayout: NextPage<Props> = ({ children, fullWidth }) => {
         ></link>
       </Head>
       <Header />
-      <div>
-        <div className="leftSide">
-          <SideBarMenu />
-        </div>
+      <div className={className}>
+        {!hideMenu && (
+          <div className="leftSide">
+            <SideBarMenu />
+          </div>
+        )}
         <div className={clsx('content', `${fullWidth && 'full-width'}`)}>{children}</div>
         <div className="rightSide"></div>
       </div>
