@@ -2,6 +2,7 @@ import React from 'react'
 
 import styles from './FullPost.module.scss'
 import { Paper, Typography } from '@material-ui/core'
+import { AddCommentForm } from '../AddCommentForm'
 
 export const FullPost: React.FC = () => {
   return (
@@ -22,6 +23,7 @@ export const FullPost: React.FC = () => {
             inflection point where, at least for us, sustaining U.S.”
           </Typography>
         </div>
+        <AddCommentForm />
       </div>
     </Paper>
   )

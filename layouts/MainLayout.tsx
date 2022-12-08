@@ -3,16 +3,18 @@
 import clsx from 'clsx'
 import type { NextPage } from 'next'
 import Head from 'next/head'
+import { CommentsSideBar } from '../components/CommentsSideBar'
 import { Header } from '../components/Header'
 import { SideBarMenu } from '../components/SidebarMenu'
 
 type Props = {
   fullWidth?: boolean
   hideMenu?: boolean
+  hideComments?: boolean
   className?: string
 }
 
-const MainLayout: NextPage<Props> = ({ children, fullWidth, hideMenu, className }) => {
+const MainLayout: NextPage<Props> = ({ children, fullWidth, hideMenu, hideComments, className }) => {
   return (
     <div>
       <Head>
@@ -34,7 +36,11 @@ const MainLayout: NextPage<Props> = ({ children, fullWidth, hideMenu, className 
           </div>
         )}
         <div className={clsx('content', `${fullWidth && 'full-width'}`)}>{children}</div>
-        <div className="rightSide"></div>
+        {!hideComments && (
+          <div className="rightSide">
+            <CommentsSideBar />
+          </div>
+        )}
       </div>
     </div>
   )

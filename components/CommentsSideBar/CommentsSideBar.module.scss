@@ -1,0 +1,36 @@
+.commentsSideBar {
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  width: 200px;
+  margin: 12px 10px;
+  word-break: break-all;
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li > button {
+    display: flex;
+    align-items: center;
+    text-align: left;
+  }
+}
+
+.commentsHiddenSideBar {
+  margin: 12px 10px;
+  position: fixed;
+  top: 10%;
+  right: 5%;
+  width: 50px;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}

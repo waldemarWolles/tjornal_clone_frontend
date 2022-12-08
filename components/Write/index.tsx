@@ -1,9 +1,5 @@
-import { Paper, Tab, Table, TableCell, TableHead, TableBody, TableRow, Tabs, Typography, Button, TextField } from '@material-ui/core'
-import { useEffect, useState } from 'react'
-import AddIcon from '@material-ui/icons/Add'
-import CheckIcon from '@material-ui/icons/Check'
+import { Button, TextField } from '@material-ui/core'
 import styles from './Write.module.scss'
-import clsx from 'clsx'
 import dynamic from 'next/dynamic'
 
 const Editor = dynamic(() => import('../Editor').then((m) => m.Editor), { ssr: false })

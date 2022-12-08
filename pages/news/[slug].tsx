@@ -5,7 +5,7 @@ import MainLayout from '../../layouts/MainLayout'
 
 const RatingsPage: NextPage = () => {
   return (
-    <MainLayout fullWidth>
+    <MainLayout fullWidth hideComments>
       <FullPost />
     </MainLayout>
   )
