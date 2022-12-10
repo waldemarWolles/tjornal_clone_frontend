@@ -8,6 +8,7 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp'
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted'
 import MessageIcon from '@material-ui/icons/Message'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const menu = [
   { text: 'Line ', icon: <LocalFireDepartmentIcon />, path: '/' },
@@ -17,6 +18,10 @@ const menu = [
 ]
 
 export const SideBarMenu: React.FC = () => {
+  const router = useRouter()
+
+  console.log(router)
+
   return (
     <div className={styles.sideBarMenu}>
       <ul>
@@ -24,10 +29,12 @@ export const SideBarMenu: React.FC = () => {
           return (
             <li key={obj.path}>
               <Link href={obj.path}>
-                <Button>
-                  {obj.icon}
-                  {obj.text}
-                </Button>
+                <a>
+                  <Button variant={router.asPath === obj.path ? 'contained' : 'text'}>
+                    {obj.icon}
+                    {obj.text}
+                  </Button>
+                </a>
               </Link>
             </li>
           )

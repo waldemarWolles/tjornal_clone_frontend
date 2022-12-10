@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { Paper, Button, IconButton, styled } from '@material-ui/core'
+import { Paper, Button, IconButton } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import PenIcon from '@material-ui/icons/BorderColor'
 import MessageIcon from '@material-ui/icons/ChatBubbleOutline'
@@ -10,8 +10,19 @@ import AvatarIcon from '@material-ui/icons/PermIdentity'
 import MenuIcon from '@material-ui/icons/Menu'
 import styles from './Header.module.scss'
 import { LogoSvg } from '../../assets/svg/logoSvg'
+import { AuthDialog } from '../AuthDialog'
 
 export const Header: React.FC = () => {
+  const [openAuthDialog, setOpenAuthDialog] = React.useState(false)
+
+  const handleClickOpen = () => {
+    setOpenAuthDialog(true)
+  }
+
+  const handleClose = () => {
+    setOpenAuthDialog(false)
+  }
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -40,7 +51,7 @@ export const Header: React.FC = () => {
         <IconButton>
           <NotificationsIcon />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={handleClickOpen}>
           <MessageIcon />
         </IconButton>
         <Link href="/profile/1">
@@ -49,6 +60,8 @@ export const Header: React.FC = () => {
           </a>
         </Link>
       </div>
+
+      <AuthDialog open={openAuthDialog} onClose={handleClose} />
     </Paper>
   )
 }

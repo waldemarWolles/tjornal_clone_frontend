@@ -47,11 +47,13 @@ export const CommentsSideBar: React.FC<PropsType> = ({ items }) => {
         {comments.map((obj, id) => {
           return (
             <li key={id}>
-              <Link href={''}>
-                <Button>
-                  {obj.icon}
-                  {obj.text}
-                </Button>
+              <Link href={`/profile/${id}`}>
+                <a>
+                  <Button>
+                    {obj.icon}
+                    {obj.text}
+                  </Button>
+                </a>
               </Link>
             </li>
           )
