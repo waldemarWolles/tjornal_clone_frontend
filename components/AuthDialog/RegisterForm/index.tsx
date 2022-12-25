@@ -4,33 +4,53 @@ import { useForm, FormProvider } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterFormSchema } from '../../../utils/schemas/registerValidation'
 import { FormField } from '../../FormField'
+import { ICreateUserDto } from '../../../utils/api/types'
+import { UserApi } from '../../../utils/api'
+import { setCookie } from 'nookies'
+import { useState } from 'react'
+import Alert from '@material-ui/lab/Alert'
 
 interface Props {}
 
 interface IFormInputs {
-  name: string
+  fullName: string
   email: string
   password: string
 }
 
 export const RegisterForm: React.FC<Props> = ({}) => {
+  const [errorMessage, setErrorMessage] = useState('')
   const formHook = useForm<IFormInputs>({
     mode: 'onChange',
     resolver: yupResolver(RegisterFormSchema),
   })
 
-  const onSubmit = (data: IFormInputs) => console.log(data)
-  console.log(formHook.formState.errors)
+  const onSubmit = async (dto: ICreateUserDto) => {
+    try {
+      const data = await UserApi.register(dto)
+      console.log(data)
+      setCookie(null, 'authToken', data.token, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: '/',
+      })
+      setErrorMessage('')
+    } catch (error: any) {
+      if (error.response) {
+        setErrorMessage(error.response.data.message)
+      }
+    }
+  }
 
   return (
     <FormProvider {...formHook}>
       <form onSubmit={formHook.handleSubmit(onSubmit)}>
         <Typography variant="h5">Register</Typography>
-        <FormField name="name" label="Name" />
+        <FormField name="fullName" label="FullName" />
         <FormField name="email" label="Email" />
         <FormField name="password" label="Password" />
+        {errorMessage && <Alert severity="error">{errorMessage}</Alert>}
         <Button
-          disabled={!formHook.formState.isValid}
+          disabled={!formHook.formState.isValid || formHook.formState.isSubmitting}
           type="submit"
           onClick={() => console.log('register')}
           className="mb-15"
