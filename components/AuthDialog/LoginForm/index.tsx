@@ -10,6 +10,8 @@ import { ILoginDto } from '../../../utils/api/types'
 import { UserApi } from '../../../utils/api'
 import { setCookie } from 'nookies'
 import { Alert } from '@material-ui/lab'
+import { useAppDispatch } from '../../../redux/hooks'
+import { setuserData } from '../../../redux/slices/user'
 
 interface LoginFormProps {}
 
@@ -19,6 +21,7 @@ interface IFormInputs {
 }
 
 export const LoginForm: React.FC<LoginFormProps> = ({}) => {
+  const dispatch = useAppDispatch()
   const [errorMessage, setErrorMessage] = useState('')
   const formHook = useForm<IFormInputs>({
     mode: 'onChange',
@@ -34,6 +37,7 @@ export const LoginForm: React.FC<LoginFormProps> = ({}) => {
         path: '/',
       })
       setErrorMessage('')
+      dispatch(setuserData(data))
     } catch (error: any) {
       if (error.response) {
         setErrorMessage(error.response.data.message)

@@ -9,6 +9,8 @@ import { UserApi } from '../../../utils/api'
 import { setCookie } from 'nookies'
 import { useState } from 'react'
 import Alert from '@material-ui/lab/Alert'
+import { useAppDispatch } from '../../../redux/hooks'
+import { setuserData } from '../../../redux/slices/user'
 
 interface Props {}
 
@@ -19,6 +21,7 @@ interface IFormInputs {
 }
 
 export const RegisterForm: React.FC<Props> = ({}) => {
+  const dispatch = useAppDispatch()
   const [errorMessage, setErrorMessage] = useState('')
   const formHook = useForm<IFormInputs>({
     mode: 'onChange',
@@ -34,6 +37,7 @@ export const RegisterForm: React.FC<Props> = ({}) => {
         path: '/',
       })
       setErrorMessage('')
+      dispatch(setuserData(data))
     } catch (error: any) {
       if (error.response) {
         setErrorMessage(error.response.data.message)

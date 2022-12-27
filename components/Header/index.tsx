@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import Link from 'next/link'
 
@@ -11,8 +12,12 @@ import MenuIcon from '@material-ui/icons/Menu'
 import styles from './Header.module.scss'
 import { LogoSvg } from '../../assets/svg/logoSvg'
 import { AuthDialog } from '../AuthDialog'
+import { useAppSelector } from '../../redux/hooks'
+import { selectUserData } from '../../redux/slices/user'
+import Image from 'next/image'
 
 export const Header: React.FC = () => {
+  const userData = useAppSelector(selectUserData)
   const [openAuthDialog, setOpenAuthDialog] = React.useState(false)
 
   const handleClickOpen = () => {
@@ -54,11 +59,22 @@ export const Header: React.FC = () => {
         <IconButton onClick={handleClickOpen}>
           <MessageIcon />
         </IconButton>
-        <Link href="/profile/1">
-          <a className="ml-15 d-flex align-center">
+        {userData ? (
+          <Link href="/profile/1">
+            <a className="ml-15 d-flex align-center">
+              <img
+                src="https://img.freepik.com/premium-vector/funny-chat-bot-with-headphones-voice-support-service-virtual-assistant-ai-online-helper_687327-188.jpg"
+                alt="asd"
+                width={30}
+                height={30}
+              />
+            </a>
+          </Link>
+        ) : (
+          <IconButton onClick={handleClickOpen}>
             <AvatarIcon />
-          </a>
-        </Link>
+          </IconButton>
+        )}
       </div>
 
       <AuthDialog open={openAuthDialog} onClose={handleClose} />
