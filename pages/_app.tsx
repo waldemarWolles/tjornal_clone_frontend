@@ -6,7 +6,7 @@ import '../styles/globals.css'
 import Head from 'next/head'
 import 'macro-css'
 import { Provider } from 'react-redux'
-import { store } from '../redux/store'
+import { store, wrapper } from '../redux/store'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -20,15 +20,13 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link
           href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
           rel="stylesheet"
-        ></link>
+        />
       </Head>
       <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <Component {...pageProps} />
-        </Provider>
+        <Component {...pageProps} />
       </ThemeProvider>
     </>
   )
 }
 
-export default MyApp
+export default wrapper.withRedux(MyApp)

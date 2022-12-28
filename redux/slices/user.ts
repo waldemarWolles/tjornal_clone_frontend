@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { IResponseUserDto } from '../../utils/api/types'
 import { RootState } from '../store'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export interface IUser {
   data: IResponseUserDto | null
@@ -16,6 +17,14 @@ export const userSlice = createSlice({
   reducers: {
     setuserData: (state, action: PayloadAction<IResponseUserDto>) => {
       state.data = action.payload
+    },
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      return {
+        ...state,
+        data: action.payload.user.data,
+      }
     },
   },
 })

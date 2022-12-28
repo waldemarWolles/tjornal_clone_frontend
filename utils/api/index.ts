@@ -15,4 +15,13 @@ export const UserApi = {
     const { data } = await instance.post<ILoginDto, { data: IResponseUserDto }>('auth/login', dto)
     return data
   },
+
+  async getMe(token: string) {
+    const { data } = await instance.get<IResponseUserDto>('users/me', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    return data
+  },
 }

@@ -14,7 +14,6 @@ import { LogoSvg } from '../../assets/svg/logoSvg'
 import { AuthDialog } from '../AuthDialog'
 import { useAppSelector } from '../../redux/hooks'
 import { selectUserData } from '../../redux/slices/user'
-import Image from 'next/image'
 
 export const Header: React.FC = () => {
   const userData = useAppSelector(selectUserData)
