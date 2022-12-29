@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
 import { theme } from '../theme'
 import { ThemeProvider } from '@material-ui/core'
 import '../styles/globals.css'
@@ -7,6 +7,9 @@ import Head from 'next/head'
 import 'macro-css'
 import { Provider } from 'react-redux'
 import { store, wrapper } from '../redux/store'
+import { parseCookies } from 'nookies'
+import { setuserData } from '../redux/slices/user'
+import { UserApi } from '../utils/api'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -28,5 +31,21 @@ function MyApp({ Component, pageProps }: AppProps) {
     </>
   )
 }
+
+MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx, Component }) => {
+  try {
+    const { authToken } = parseCookies(ctx)
+    const userData = await UserApi.getMe(authToken)
+    store.dispatch(setuserData(userData))
+  } catch (error) {
+    console.log(error)
+  }
+
+  return {
+    pageProps: {
+      ...(Component.getInitialProps ? await Component.getInitialProps({ ...ctx, store }) : {}),
+    },
+  }
+})
 
 export default wrapper.withRedux(MyApp)

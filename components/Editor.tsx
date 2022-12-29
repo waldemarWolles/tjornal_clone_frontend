@@ -9,6 +9,10 @@ export const Editor: React.FC = (props: Props) => {
     const editor = new EditorJS({
       holder: 'editor',
       placeholder: 'Enter your article text',
+      async onChange() {
+        const data = await editor.save()
+        console.log(data)
+      },
     })
 
     return () => {

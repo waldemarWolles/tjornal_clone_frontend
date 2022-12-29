@@ -24,6 +24,10 @@ export const FullPost: React.FC = () => {
           </Typography>
         </div>
         <AddCommentForm />
+        <Typography>Comment 1</Typography>
+        <Typography>Comment 2</Typography>
+        <Typography>Comment 3</Typography>
+        <Typography>Comment 4</Typography>
       </div>
     </Paper>
   )
