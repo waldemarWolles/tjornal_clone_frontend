@@ -5,12 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { RegisterFormSchema } from '../../../utils/schemas/registerValidation'
 import { FormField } from '../../FormField'
 import { ICreateUserDto } from '../../../utils/api/types'
-import { UserApi } from '../../../utils/api'
 import { setCookie } from 'nookies'
 import { useState } from 'react'
 import Alert from '@material-ui/lab/Alert'
 import { useAppDispatch } from '../../../redux/hooks'
 import { setuserData } from '../../../redux/slices/user'
+import { Api } from '../../../utils/api'
 
 interface Props {}
 
@@ -30,9 +30,9 @@ export const RegisterForm: React.FC<Props> = ({}) => {
 
   const onSubmit = async (dto: ICreateUserDto) => {
     try {
-      const data = await UserApi.register(dto)
+      const data = await Api().user.register(dto)
       console.log(data)
-      setCookie(null, 'authToken', data.token, {
+      setCookie(null, 'tj_token', data.token, {
         maxAge: 30 * 24 * 60 * 60,
         path: '/',
       })

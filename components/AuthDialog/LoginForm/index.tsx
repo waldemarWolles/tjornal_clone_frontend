@@ -7,11 +7,11 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { LoginFormSchema } from '../../../utils/schemas/loginValidation'
 import { FormField } from '../../FormField'
 import { ILoginDto } from '../../../utils/api/types'
-import { UserApi } from '../../../utils/api'
 import { setCookie } from 'nookies'
 import { Alert } from '@material-ui/lab'
 import { useAppDispatch } from '../../../redux/hooks'
 import { setuserData } from '../../../redux/slices/user'
+import { Api } from '../../../utils/api'
 
 interface LoginFormProps {}
 
@@ -30,9 +30,9 @@ export const LoginForm: React.FC<LoginFormProps> = ({}) => {
 
   const onSubmit = async (dto: ILoginDto) => {
     try {
-      const data = await UserApi.login(dto)
+      const data = await Api().user.login(dto)
       console.log(data)
-      setCookie(null, 'authToken', data.token, {
+      setCookie(null, 'tj_token', data.token, {
         maxAge: 30 * 24 * 60 * 60,
         path: '/',
       })
