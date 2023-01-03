@@ -6,7 +6,6 @@ import '../styles/globals.css'
 import Head from 'next/head'
 import 'macro-css'
 import { wrapper } from '../redux/store'
-import { parseCookies } from 'nookies'
 import { setuserData } from '../redux/slices/user'
 import { Api } from '../utils/api'
 
@@ -33,10 +32,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 
 MyApp.getInitialProps = wrapper.getInitialAppProps((store) => async ({ ctx, Component }) => {
   try {
-    const { authToken } = parseCookies(ctx)
     const userData = await Api(ctx).user.getMe()
     store.dispatch(setuserData(userData))
   } catch (error) {
+    if (ctx.asPath === '/write') {
+      ctx.res?.writeHead(302, {
+        Location: '/403',
+      })
+      ctx.res?.end()
+    }
+
     console.log(error)
   }
 

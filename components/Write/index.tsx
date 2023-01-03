@@ -3,6 +3,7 @@ import styles from './Write.module.scss'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { OutputData } from '@editorjs/editorjs'
+import { Api } from '../../utils/api'
 
 const Editor = dynamic(() => import('../Editor').then((m) => m.Editor), { ssr: false })
 
@@ -12,7 +13,18 @@ interface WriteProps {
 const Write: React.FC<WriteProps> = ({ defaultTitle }) => {
   const [title, setTitle] = useState('')
   const [blocks, setBlocks] = useState<OutputData['blocks']>([])
-  console.log(blocks)
+
+  const onAddPost = async () => {
+    try {
+      const post = await Api().post.create({
+        title,
+        body: blocks,
+      })
+      console.log(post)
+    } catch (error) {
+      console.warn('Create post', error)
+    }
+  }
 
   return (
     <div style={{ backgroundColor: '#fff' }}>
@@ -22,7 +34,7 @@ const Write: React.FC<WriteProps> = ({ defaultTitle }) => {
         <Editor onChange={(arr) => setBlocks(arr)} />
       </div>
 
-      <Button variant="contained" className={styles.penButton}>
+      <Button onClick={onAddPost} variant="contained" className={styles.penButton}>
         Publish
       </Button>
     </div>

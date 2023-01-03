@@ -27,6 +27,12 @@ export const Header: React.FC = () => {
     setOpenAuthDialog(false)
   }
 
+  React.useEffect(() => {
+    if (openAuthDialog && userData) {
+      setOpenAuthDialog(false)
+    }
+  }, [openAuthDialog, userData])
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
