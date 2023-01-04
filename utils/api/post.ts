@@ -9,7 +9,12 @@ interface ICreatePostDto {
 
 export const PostApi = (instance: AxiosInstance) => ({
   async getAll() {
-    const { data } = await instance.get<IPost>('posts')
+    const { data } = await instance.get<IPost[]>('posts')
+    return data
+  },
+
+  async getOne(id: number) {
+    const { data } = await instance.get<IPost>(`posts/${id}`)
     return data
   },
 

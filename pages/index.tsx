@@ -14,7 +14,7 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
   return (
     <MainLayout fullWidth={false}>
       {posts?.map((post, id) => {
-        return <Post key={post.id} />
+        return <Post key={post.id} title={post.title} id={post.id} description={post.description} />
       })}
     </MainLayout>
   )
