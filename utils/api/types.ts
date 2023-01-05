@@ -25,6 +25,7 @@ export interface IPost {
   tags: null | string
   id: number
   views: number
+  user: IResponseUserDto
   createdAt: string
   updatedAt: string
 }

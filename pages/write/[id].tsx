@@ -15,8 +15,19 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const id = ctx?.params?.id
 
-    const post = id && (await Api(ctx).post.getOne(+id))
-    console.log(post)
+    const post = await Api(ctx).post.getOne(+id!)
+    const user = await Api(ctx).user.getMe()
+
+    if (post?.user?.id !== user.id) {
+      return {
+        props: {},
+        redirect: {
+          destination: '/',
+          permanent: false,
+        },
+      }
+    }
+
     return {
       props: {
         post,
