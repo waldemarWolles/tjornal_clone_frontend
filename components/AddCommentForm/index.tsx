@@ -3,11 +3,37 @@ import React, { useState } from 'react'
 import styles from './AddCommentForm.module.scss'
 import { Button, Paper, Typography } from '@material-ui/core'
 import Input from '@material-ui/core/Input'
+import { Api } from '../../utils/api'
+import { useAppSelector } from '../../redux/hooks'
+import { selectUserData } from '../../redux/slices/user'
 
-export const AddCommentForm: React.FC = () => {
+interface IAddCommentFormProps {
+  postId: number
+}
+
+export const AddCommentForm: React.FC<IAddCommentFormProps> = ({ postId }) => {
+  const isAuth = useAppSelector(selectUserData)
   const [clicked, setClicked] = useState<boolean>(false)
   const [text, setText] = useState<string>('')
-  console.log(text)
+
+  const onAddComment = async () => {
+    try {
+      const comment = await Api().comment.create({
+        postId,
+        text,
+      })
+      console.log(comment)
+
+      setClicked(false)
+      setText('')
+    } catch (error) {
+      console.warn('onAddComment', error)
+    }
+  }
+
+  if (!isAuth) {
+    return null
+  }
 
   return (
     <div className={styles.formContainer}>
@@ -22,7 +48,7 @@ export const AddCommentForm: React.FC = () => {
         multiline
       />
       {clicked && (
-        <Button onClick={() => setText('')} disabled={!text} className={styles.button} color="primary" variant="contained">
+        <Button onClick={onAddComment} disabled={!text} className={styles.button} color="primary" variant="contained">
           Publish
         </Button>
       )}

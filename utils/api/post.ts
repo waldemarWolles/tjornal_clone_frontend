@@ -22,4 +22,9 @@ export const PostApi = (instance: AxiosInstance) => ({
     const { data } = await instance.post<ICreatePostDto, { data: IPost }>('posts', dto)
     return data
   },
+
+  async update(id: number, dto: ICreatePostDto) {
+    const { data } = await instance.patch<ICreatePostDto, { data: IPost }>(`posts/${id}`, dto)
+    return data
+  },
 })

@@ -29,3 +29,12 @@ export interface IPost {
   createdAt: string
   updatedAt: string
 }
+
+export interface IComment {
+  id: number
+  post: IPost
+  user: IResponseUserDto
+  text: string
+  createdAt: string
+  updatedAt: string
+}

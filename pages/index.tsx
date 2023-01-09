@@ -4,11 +4,11 @@ import MainLayout from '../layouts/MainLayout'
 import { Api } from '../utils/api'
 import { IPost } from '../utils/api/types'
 
-interface HomeProps {
+interface IHomeProps {
   posts: IPost[]
 }
 
-const Home: NextPage<HomeProps> = ({ posts }) => {
+const Home: NextPage<IHomeProps> = ({ posts }) => {
   console.log(posts)
 
   return (

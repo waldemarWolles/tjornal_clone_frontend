@@ -2,11 +2,16 @@ import type { GetServerSideProps, NextPage } from 'next'
 import MainLayout from '../../layouts/MainLayout'
 import Write from '../../components/Write'
 import { Api } from '../../utils/api'
+import { IPost } from '../../utils/api/types'
 
-const WritePage: NextPage = () => {
+interface IWritePageProps {
+  post: IPost
+}
+
+const WritePage: NextPage<IWritePageProps> = ({ post }) => {
   return (
     <MainLayout className="main-layout-white" fullWidth hideMenu hideComments>
-      <Write defaultTitle="DEFAUTL VALUE" />
+      <Write data={post} defaultTitle="DEFAUTL VALUE" />
     </MainLayout>
   )
 }

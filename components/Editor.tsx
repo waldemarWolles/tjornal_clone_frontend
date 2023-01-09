@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 
 import EditorJS, { OutputData } from '@editorjs/editorjs'
 
-interface EditorProps {
+interface IEditorProps {
   onChange: (blocks: OutputData['blocks']) => void
+  initialBlocks?: OutputData['blocks']
 }
 
-export const Editor: React.FC<EditorProps> = ({ onChange }) => {
+export const Editor: React.FC<IEditorProps> = ({ onChange, initialBlocks }) => {
   useEffect(() => {
     const editor = new EditorJS({
       holder: 'editor',
@@ -14,6 +15,9 @@ export const Editor: React.FC<EditorProps> = ({ onChange }) => {
       async onChange() {
         const { blocks } = await editor.save()
         onChange(blocks)
+      },
+      data: {
+        blocks: initialBlocks ? initialBlocks : [],
       },
     })
 
