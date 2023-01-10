@@ -6,12 +6,14 @@ import Input from '@material-ui/core/Input'
 import { Api } from '../../utils/api'
 import { useAppSelector } from '../../redux/hooks'
 import { selectUserData } from '../../redux/slices/user'
+import { IComment } from '../../utils/api/types'
 
 interface IAddCommentFormProps {
   postId: number
+  onSuccessAdd: (comment: IComment) => void
 }
 
-export const AddCommentForm: React.FC<IAddCommentFormProps> = ({ postId }) => {
+export const AddCommentForm: React.FC<IAddCommentFormProps> = ({ postId, onSuccessAdd }) => {
   const isAuth = useAppSelector(selectUserData)
   const [clicked, setClicked] = useState<boolean>(false)
   const [text, setText] = useState<string>('')
@@ -22,7 +24,7 @@ export const AddCommentForm: React.FC<IAddCommentFormProps> = ({ postId }) => {
         postId,
         text,
       })
-      console.log(comment)
+      onSuccessAdd(comment)
 
       setClicked(false)
       setText('')

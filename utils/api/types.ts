@@ -32,7 +32,7 @@ export interface IPost {
 
 export interface IComment {
   id: number
-  post: IPost
+  postId: number
   user: IResponseUserDto
   text: string
   createdAt: string

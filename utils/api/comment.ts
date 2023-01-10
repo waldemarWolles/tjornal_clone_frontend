@@ -17,4 +17,8 @@ export const CommentApi = (instance: AxiosInstance) => ({
     const { data } = await instance.post<ICreateCommentDto, { data: IComment }>('comments', dto)
     return data
   },
+
+  async delete(commentId: number) {
+    return await instance.delete(`comments/${commentId}`)
+  },
 })
