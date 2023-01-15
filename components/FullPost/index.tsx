@@ -5,24 +5,14 @@ import { Button, Paper, Typography } from '@material-ui/core'
 import { AddCommentForm } from '../AddCommentForm'
 import { IComment, IPost } from '../../utils/api/types'
 import { Api } from '../../utils/api'
+import { useComments } from '../../hooks/useComments'
 
 interface IFullPostProps {
   postData: IPost
 }
 
 export const FullPost: React.FC<IFullPostProps> = ({ postData }) => {
-  const [comments, setComments] = useState<IComment[]>([])
-
-  useEffect(() => {
-    ;(async () => {
-      try {
-        const array = await Api().comment.getAll()
-        setComments(array)
-      } catch (error) {
-        console.warn('Fech comments', error)
-      }
-    })()
-  }, [])
+  const { comments, setComments } = useComments(postData.id)
 
   const onAddComment = (comment: IComment) => {
     setComments((prev) => [...prev, comment])
@@ -51,18 +41,16 @@ export const FullPost: React.FC<IFullPostProps> = ({ postData }) => {
             })}
         </div>
         <AddCommentForm onSuccessAdd={onAddComment} postId={postData.id} />
-        {comments
-          .filter((comment) => comment.postId === postData.id)
-          .map((comment, id) => {
-            return (
-              <Typography key={comment.id}>
-                {comment.text}
-                <Button onClick={() => onRemoveComment(comment.id)} variant="outlined">
-                  Remove
-                </Button>
-              </Typography>
-            )
-          })}
+        {comments.map((comment, id) => {
+          return (
+            <Typography key={comment.id}>
+              {comment.text}
+              <Button onClick={() => onRemoveComment(comment.id)} variant="outlined">
+                Remove
+              </Button>
+            </Typography>
+          )
+        })}
       </div>
     </Paper>
   )

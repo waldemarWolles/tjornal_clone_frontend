@@ -13,6 +13,7 @@ export interface IResponseUserDto {
   createAt: string
   email: string
   fullName: string
+  commentsCount?: number
   id: number
   token: string
   updatedAt: string

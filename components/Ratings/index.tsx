@@ -4,8 +4,14 @@ import AddIcon from '@material-ui/icons/Add'
 import CheckIcon from '@material-ui/icons/Check'
 import styles from './Ratings.module.scss'
 import clsx from 'clsx'
+import { IResponseUserDto } from '../../utils/api/types'
+import React from 'react'
 
-const Ratings: React.FC = () => {
+interface IRatingsPageProps {
+  users: IResponseUserDto[]
+}
+
+const Ratings: React.FC<IRatingsPageProps> = ({ users }) => {
   const [tabValue, setTabValue] = useState<string>('may')
   const [checked, setChecked] = useState<boolean>(false)
 
@@ -46,18 +52,25 @@ const Ratings: React.FC = () => {
             </TableRow>
           </TableHead>
           <TableBody style={{ borderBottom: 'none', borderBottomColor: 'transparent' }}>
-            <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
-              <TableCell component="th" scope="row">
-                <span className="mr-15">1</span>
-                JAck
-              </TableCell>
-              <TableCell align="right">1500</TableCell>
-              <TableCell align="right">
-                <Button onClick={() => setChecked(!checked)} className={clsx(styles.button, checked && styles.disabled)}>
-                  {!checked ? <AddIcon /> : <CheckIcon />}
-                </Button>
-              </TableCell>
-            </TableRow>
+            {users?.map((user, id) => {
+              return (
+                <TableRow key={user.token} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                  <TableCell component="th" scope="row">
+                    <span className="mr-15">{id + 1}</span>
+                    {user.fullName}
+                  </TableCell>
+                  <TableCell component="th" scope="row">
+                    <span className="mr-15">{user?.commentsCount}</span>
+                  </TableCell>
+                  <TableCell align="right">{user.email}</TableCell>
+                  <TableCell align="right">
+                    <Button onClick={() => setChecked(!checked)} className={clsx(styles.button, checked && styles.disabled)}>
+                      {!checked ? <AddIcon /> : <CheckIcon />}
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </Paper>

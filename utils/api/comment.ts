@@ -8,8 +8,8 @@ interface ICreateCommentDto {
 }
 
 export const CommentApi = (instance: AxiosInstance) => ({
-  async getAll() {
-    const { data } = await instance.get<IComment[]>('comments')
+  async getAll(postId?: number) {
+    const { data } = await instance.get<IComment[]>('comments', { params: { postId } })
     return data
   },
 

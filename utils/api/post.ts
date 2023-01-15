@@ -7,9 +7,23 @@ interface ICreatePostDto {
   body: OutputData['blocks']
 }
 
+interface ISearchPostDto {
+  title?: string
+  body?: string
+  views?: 'DESC' | 'ASC'
+  tag?: string
+  limit?: number
+  take?: number
+}
+
 export const PostApi = (instance: AxiosInstance) => ({
   async getAll() {
     const { data } = await instance.get<IPost[]>('posts')
+    return data
+  },
+
+  async search(query: ISearchPostDto) {
+    const { data } = await instance.get<{ items: IPost[]; total: number }>('posts/search', { params: query })
     return data
   },
 

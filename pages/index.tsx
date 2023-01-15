@@ -23,7 +23,6 @@ const Home: NextPage<IHomeProps> = ({ posts }) => {
 export const getServerSideProps = async (ctx) => {
   try {
     const posts = await Api().post.getAll()
-    console.log(posts)
 
     return {
       props: {

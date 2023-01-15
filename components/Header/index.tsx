@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react'
+import React, { ReactEventHandler } from 'react'
 import Link from 'next/link'
 
-import { Paper, Button, IconButton } from '@material-ui/core'
+import { Paper, Button, IconButton, ListItem, List } from '@material-ui/core'
 import SearchIcon from '@material-ui/icons/Search'
 import PenIcon from '@material-ui/icons/BorderColor'
 import MessageIcon from '@material-ui/icons/ChatBubbleOutline'
@@ -14,10 +14,14 @@ import { LogoSvg } from '../../assets/svg/logoSvg'
 import { AuthDialog } from '../AuthDialog'
 import { useAppSelector } from '../../redux/hooks'
 import { selectUserData } from '../../redux/slices/user'
+import { IPost } from '../../utils/api/types'
+import { Api } from '../../utils/api'
 
 export const Header: React.FC = () => {
   const userData = useAppSelector(selectUserData)
   const [openAuthDialog, setOpenAuthDialog] = React.useState(false)
+  const [searchValue, setSearchValue] = React.useState('')
+  const [posts, setPosts] = React.useState<IPost[]>([])
 
   const handleClickOpen = () => {
     setOpenAuthDialog(true)
@@ -33,6 +37,14 @@ export const Header: React.FC = () => {
     }
   }, [openAuthDialog, userData])
 
+  const handleChangeInput = async (e: { target: { value: string } }) => {
+    setSearchValue(e.target.value)
+    try {
+      const { items } = await Api().post.search({ title: e.target.value })
+      setPosts(items)
+    } catch (error) {}
+  }
+
   return (
     <Paper classes={{ root: styles.root }} elevation={0}>
       <div className="d-flex align-center">
@@ -47,7 +59,22 @@ export const Header: React.FC = () => {
 
         <div className={styles.searchBlock}>
           <SearchIcon />
-          <input type="text" placeholder="Search" />
+          <input value={searchValue} onChange={handleChangeInput} type="text" placeholder="Search" />
+          {posts.length > 0 && (
+            <Paper className={styles.searchResults}>
+              <List>
+                {posts.map((post) => {
+                  return (
+                    <Link href={`/news/${post.id}`} key={post.id}>
+                      <a>
+                        <ListItem button>{post.title}</ListItem>
+                      </a>
+                    </Link>
+                  )
+                })}
+              </List>
+            </Paper>
+          )}
         </div>
         <Link href="/write">
           <a>

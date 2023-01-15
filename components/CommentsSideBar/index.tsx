@@ -7,29 +7,10 @@ import AvatarIcon from '@material-ui/icons/PermIdentity'
 import Link from 'next/link'
 import ArrowRightIcon from '@material-ui/icons/KeyboardArrowRight'
 import ArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft'
+import { useComments } from '../../hooks/useComments'
 
-const comments = [
-  { text: 'Liadasdasdasdasdasdne ', icon: <AvatarIcon /> },
-  { text: 'Messaasdasdasdasdasdasges', icon: <AvatarIcon /> },
-  { text: 'Ratidasdasdasdasdasdng TJ', icon: <AvatarIcon /> },
-  { text: 'Subasdasdasdasdasdasdscriptions', icon: <AvatarIcon /> },
-]
-
-type Comment = {
-  text: string
-  id: number
-  createdAt: string
-  user: {
-    fullName: string
-    avatarUrl: string
-  }
-}
-
-interface PropsType {
-  items?: Comment[]
-}
-
-export const CommentsSideBar: React.FC<PropsType> = ({ items }) => {
+export const CommentsSideBar: React.FC = () => {
+  const { comments } = useComments()
   const [visible, setVisible] = useState(true)
 
   const toggleVisible = () => {
@@ -44,14 +25,14 @@ export const CommentsSideBar: React.FC<PropsType> = ({ items }) => {
       </Typography>
 
       <ul>
-        {comments.map((obj, id) => {
+        {comments.map((comment, id) => {
           return (
             <li key={id}>
-              <Link href={`/profile/${id}`}>
+              <Link href={`/profile/${comment.user.id}`}>
                 <a>
                   <Button>
-                    {obj.icon}
-                    {obj.text}
+                    {comment.user.fullName}
+                    {comment.text}
                   </Button>
                 </a>
               </Link>
